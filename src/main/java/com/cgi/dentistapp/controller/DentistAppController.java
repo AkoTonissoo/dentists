@@ -41,8 +41,10 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
     }
 
     @PostMapping("/")
-    public String postRegisterForm(@Valid DentistVisitDTO dentistVisitDTO, BindingResult bindingResult) {
+    public String postRegisterForm(@Valid DentistVisitDTO dentistVisitDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            Iterable<DentistEntity> dentists = dentistService.getAllDentists();
+            model.addAttribute("dentists", dentists);
             return "form";
         }
 

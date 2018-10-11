@@ -12,7 +12,7 @@ public class DentistVisitDTO {
     String dentistName;
 
     @NotNull
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    @DateTimeFormat(pattern = "dd.MM.yyyy HH")//TODO Tee see formis mingi datepickeri ja asjadega mitte tekstiga kunagi
     Date visitTime;
 
     public DentistVisitDTO() {

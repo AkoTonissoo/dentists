@@ -1,6 +1,7 @@
 package com.cgi.dentistapp.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "dentist_visit")
@@ -10,6 +11,52 @@ public class DentistVisitEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    //TODO implementation
+    private Date date;
 
+    private String dentist;
+
+
+
+
+    public DentistVisitEntity() {
+    }
+
+    public DentistVisitEntity(Long id, Date date, String dentist) {
+        this.id = id;
+        this.date = date;
+        this.dentist = dentist;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getDentist() {
+        return dentist;
+    }
+
+    public void setDentist(String dentist) {
+        this.dentist = dentist;
+    }
+
+    @Override
+    public String toString() {
+        return "DentistVisitEntity{" +
+                "id=" + id +
+                ", date=" + date +
+                ", dentist='" + dentist + '\'' +
+                '}';
+    }
 }

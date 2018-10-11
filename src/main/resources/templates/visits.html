@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<table action="#" th:action="@{/visits}">
+    <tr>
+        <td>
+            <p th:each="visit : ${visits}"
+                    th:value="${visit.id}"
+                    th:text="${visit.date}+${visit.dentist}">
+            </p>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

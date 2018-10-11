@@ -2,6 +2,7 @@ package com.cgi.dentistapp.controller;
 
 import com.cgi.dentistapp.dto.DentistVisitDTO;
 import com.cgi.dentistapp.entity.DentistEntity;
+import com.cgi.dentistapp.entity.DentistVisitEntity;
 import com.cgi.dentistapp.service.DentistService;
 import com.cgi.dentistapp.service.DentistVisitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,13 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
         Iterable<DentistEntity> dentists = dentistService.getAllDentists();
         model.addAttribute("dentists", dentists);
         return "form";
+    }
+
+    @GetMapping("/visits")
+    public String showRegistrations(Model model) {
+        Iterable<DentistVisitEntity> visits = dentistVisitService.getAllVisits();
+        model.addAttribute("visits", visits);
+        return "visits";
     }
 
     @PostMapping("/")

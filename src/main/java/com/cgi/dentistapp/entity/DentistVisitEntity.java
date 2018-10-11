@@ -21,8 +21,7 @@ public class DentistVisitEntity {
     public DentistVisitEntity() {
     }
 
-    public DentistVisitEntity(Long id, Date date, String dentist) {
-        this.id = id;
+    public DentistVisitEntity(Date date, String dentist) {
         this.date = date;
         this.dentist = dentist;
     }

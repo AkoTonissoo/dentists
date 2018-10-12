@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-<table action="#" th:action="@{/visits}">
-    <tr>
+<table>
+    <tr th:each="visit : ${visits}">
         <td>
-            <p th:each="visit : ${visits}"
-                    th:value="${visit.id}"
-                    th:text="${visit.date}+${visit.dentist}">
+            <a th:href="@{'/visits/delete/' + ${visit.id}}" class="btn btn-danger">Delet3e</a>
+
+        <td><a th:href="@{'/visits/edit/' + ${visit.id}}">edit</a></td>
+        </td>
+        <td>
+            <p th:value="${visit.id}"
+               th:text="${visit.id}+${visit.dentist}">
             </p>
+
+            <a th:href="@{/visits/delete}">Delete</a>
+
+            <a th:href="|@{/visits/${visit.id}}|" class="btn btn-danger">Delet2e</a>
+
+            <form action="#" th:action="@{'/visits/'+'${visit.id}'}" th:object="${dentistVisitDTO}">
+                <button type="submit" th:text="#{delete.visit}"></button>
+            </form>
+            <button type="submit" th:text="#{edit.visit}"></button>
         </td>
     </tr>
 </table>

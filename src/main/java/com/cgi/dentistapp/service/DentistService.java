@@ -18,4 +18,6 @@ public class DentistService {
         return repository.findAll();
     }
 
+
+
 }

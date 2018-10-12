@@ -7,6 +7,9 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class DentistVisitDTO {
+    //formides peaks kasutama DTO (controller ka) ja entityd tabeliteks vb?
+
+    Integer id;
 
     @Size(min = 1, max = 50)
     String dentistName;
@@ -18,9 +21,18 @@ public class DentistVisitDTO {
     public DentistVisitDTO() {
     }
 
-    public DentistVisitDTO(String dentistName, Date visitTime) {
+    public DentistVisitDTO(Integer id, String dentistName, Date visitTime) {
+        this.id = id;
         this.dentistName = dentistName;
         this.visitTime = visitTime;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getDentistName() {

@@ -9,7 +9,7 @@ public class DentistVisitEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     private Date date;
 
@@ -26,11 +26,17 @@ public class DentistVisitEntity {
         this.dentist = dentist;
     }
 
-    public Long getId() {
+    public DentistVisitEntity(Integer id, Date date, String dentist) {
+        this.id = id;
+        this.date = date;
+        this.dentist = dentist;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

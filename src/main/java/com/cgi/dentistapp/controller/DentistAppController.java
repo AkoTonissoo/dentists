@@ -10,8 +10,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -47,6 +46,21 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
         model.addAttribute("visits", visits);
         return "visits";
     }
+    //kind of kustutab aga peab veel panema sinna confirm buttoni mille abil oleks lihtne tagasi visititele routida
+    @RequestMapping(value = "/visits/delete/{id}", method = RequestMethod.GET)
+    public String removeVisit(@PathVariable Integer id){
+        dentistVisitService.removeVisit(id);
+        println(dentistVisitService.getAllVisits().toString());
+        return "visits";
+    }
+    //see töötab ka kindof
+    //next step nende kahe asjaga on teha n-ö vaheaken siis kus kas editid v confirmid paska, uus html fail peaks see olema
+    //ja sealt võiks edasi juba lõbusalt minna äkki tglt usun küll!!!!P.S mdea miks DTO kasutusel peaks olema üldse :D
+    @RequestMapping(value= "/visits/edit/{id}", method = RequestMethod.GET)
+    public String editVisit(@PathVariable("id") Integer id, Model model ) {
+        model.addAttribute(dentistVisitService.getVisit(id));
+        return  "visits";
+    }
 
     @PostMapping("/")
     public String postRegisterForm(@Valid DentistVisitDTO dentistVisitDTO, BindingResult bindingResult, Model model) {
@@ -56,7 +70,7 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
             return "form";
         }
 
-        dentistVisitService.addVisit(dentistVisitDTO.getDentistName(), dentistVisitDTO.getVisitTime());
+        dentistVisitService.addVisit(new DentistVisitEntity(dentistVisitDTO.getVisitTime(), dentistVisitDTO.getDentistName()));
         println(dentistVisitService.getAllVisits().toString());
         return "redirect:/results";
     }

@@ -1,6 +1,5 @@
 package com.cgi.dentistapp.service;
 
-import com.cgi.dentistapp.dto.DentistVisitDTO;
 import com.cgi.dentistapp.entity.DentistVisitEntity;
 import com.cgi.dentistapp.repositories.DentistVisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;

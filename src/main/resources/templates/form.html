@@ -1,22 +1,22 @@
 <html>
 <body>
-<form action="#" th:action="@{/}" th:object="${dentistVisitDTO}" method="post">
+<form action="#" th:action="@{/}" th:object="${dentistVisitEntity}" method="post">
     <table>
         <tr>
             <td><p th:text="#{dentist.name}">dentist.name</p></td>
-            <td><select class="form-control" th:field="*{dentistName}">
-                <option th:each="dentist : ${dentists}"
-                        th:value="${dentist.name}"
-                        th:text="${dentist.name}">
+            <td><select class="form-control" th:field="*{dentist}">
+                <option th:each="den : ${dentists}"
+                        th:value="${den.name}"
+                        th:text="${den.name}">
                 </option>
             </select>
             </td>
-            <td th:if="${#fields.hasErrors('dentistName')}" th:errors="*{dentistName}">name.error</td>
+            <td th:if="${#fields.hasErrors('dentist')}" th:errors="*{dentist}">name.error</td>
         </tr>
         <tr>
             <td><p th:text="#{visit.date}">visit.date</p></td>
-            <td><input type="text" th:field="*{visitTime}" /></td>
-            <td th:if="${#fields.hasErrors('visitTime')}" th:errors="*{visitTime}">date.error</td>
+            <td><input type="text" th:field="*{date}" /></td>
+            <td th:if="${#fields.hasErrors('date')}" th:errors="*{date}">date.error</td>
         </tr>
         <tr>
             <td>

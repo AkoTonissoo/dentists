@@ -1,6 +1,10 @@
 package com.cgi.dentistapp.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -11,8 +15,11 @@ public class DentistVisitEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @NotNull
+    @DateTimeFormat(pattern = "dd.MM.yyyy HH")//TODO Tee see formis mingi datepickeri ja asjadega mitte tekstiga kunagi
     private Date date;
 
+    @Size(min = 1, max = 50)
     private String dentist;
 
 

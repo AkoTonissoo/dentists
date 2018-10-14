@@ -17,14 +17,15 @@ public class DentistVisitService {
 
 
     public void addVisit(DentistVisitEntity entity) {
+        //
         repository.save(entity);
-        //TODO implementation
+
     }
 
     public Iterable<DentistVisitEntity> getAllVisits() {
         return repository.findAll();
     }
-    //both of them ID järgi kuidagi
+
     public void removeVisit(Integer id){
         repository.delete(id);
     }

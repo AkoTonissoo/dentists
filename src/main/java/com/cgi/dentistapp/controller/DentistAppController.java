@@ -43,64 +43,44 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
         return "visits";
     }
 
-    //kind of kustutab aga peab veel panema sinna confirm buttoni mille abil oleks lihtne tagasi visititele routida
     @GetMapping("/visits/delete/{id}")
-    public String removeVisit(@PathVariable Integer id){
+    public String chooseVisitToDelete(@PathVariable Integer id){
         dentistVisitService.removeVisit(id);
-        println(dentistVisitService.getAllVisits().toString());
         return "delete";
     }
-    //see töötab ka kindof
-    //next step nende kahe asjaga on teha n-ö vaheaken siis kus kas editid v confirmid paska, uus html fail peaks see olema
-    //ja sealt võiks edasi juba lõbusalt minna äkki tglt usun küll!!!!P.S mdea miks DTO kasutusel peaks olema üldse :D
+
     @GetMapping("/visits/edit/{id}")
     public String chooseVisitToEdit(@PathVariable("id") Integer id, Model model ) {
-        println(dentistVisitService.getVisit(id).toString());
         model.addAttribute("visit", dentistVisitService.getVisit(id));
         return "edit";
     }
 
-    @PostMapping("/delete")
-    public String chooseVisitToDelete() {
-        //dentistVisitService.addVisit(new DentistVisitEntity(visit.getVisitTime(), visit.getDentistName()));
-        return "redirect:/visits";
-    }
-
-
-    @GetMapping("/edit")
-    public String showEditForm(DentistVisitEntity dentistVisitDTO, Model model) {
-        model.addAttribute("dentistVisitDTO", dentistVisitDTO);
-        return "edit";
-    }
-    //@RequestParam("name") String name, @RequestParam("date")
     @PostMapping("/edit")
     public String editVisit(DentistVisitEntity visit, BindingResult bindingResult, ModelMap modelMap) {
         if (bindingResult.hasErrors()) {
             return "form";
         }
+
         modelMap.addAttribute("visit", visit);
-        //DentistVisitDTO visitHelper = modelMap.get("visit").;
-        println(visit.getDate().toString()+ visit.getDentist().toString());
-        println(modelMap.get("visit").toString());
         dentistVisitService.removeVisit(visit.getId());
         dentistVisitService.addVisit(new DentistVisitEntity(visit.getDate(), visit.getDentist()));
         return "redirect:/visits";
     }
 
     @GetMapping("/")
-    public String showRegisterForm(DentistVisitEntity dentistVisitDTO, Model model) {
+    public String showRegisterForm(DentistVisitEntity visit, Model model) {
         Iterable<DentistEntity> dentists = dentistService.getAllDentists();
         model.addAttribute("dentists", dentists);
         return "form";
     }
 
     @PostMapping("/")
-    public String postRegisterForm(@Valid DentistVisitEntity dentistVisitDTO, BindingResult bindingResult) {
+    public String postRegisterForm(@Valid DentistVisitEntity visit, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "form";
         }
 
-        dentistVisitService.addVisit(new DentistVisitEntity(dentistVisitDTO.getDate(), dentistVisitDTO.getDentist()));
+        dentistVisitService.addVisit(new DentistVisitEntity(visit.getDate(), visit.getDentist()));
         println(dentistVisitService.getAllVisits().toString());
         return "redirect:/results";
     }

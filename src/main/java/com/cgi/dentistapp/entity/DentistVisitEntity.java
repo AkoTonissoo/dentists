@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -16,8 +17,8 @@ public class DentistVisitEntity {
     private Integer id;
 
     @NotNull
-    @DateTimeFormat(pattern = "dd.MM.yyyy HH")//TODO Tee see formis mingi datepickeri ja asjadega mitte tekstiga kunagi
-    private Date date;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime date;
 
     @Size(min = 1, max = 50)
     private String dentist;
@@ -28,12 +29,12 @@ public class DentistVisitEntity {
     public DentistVisitEntity() {
     }
 
-    public DentistVisitEntity(Date date, String dentist) {
+    public DentistVisitEntity(LocalDateTime date, String dentist) {
         this.date = date;
         this.dentist = dentist;
     }
 
-    public DentistVisitEntity(Integer id, Date date, String dentist) {
+    public DentistVisitEntity(Integer id, LocalDateTime date, String dentist) {
         this.id = id;
         this.date = date;
         this.dentist = dentist;
@@ -47,11 +48,11 @@ public class DentistVisitEntity {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

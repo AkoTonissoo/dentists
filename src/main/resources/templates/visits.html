@@ -1,18 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <body>
 <table>
     <tr th:each="visit : ${visits}">
         <td>
+            <p th:text="${visit.date}+' '+${visit.dentist}"></p>
+        </td>
+        <td>
             <a th:href="@{'/visits/delete/' + ${visit.id}}">Delete</a>
         </td>
         <td>
-            <a th:href="@{'/visits/edit/' + ${visit.id}}">edit</a>
+            <a th:href="@{'/visits/edit/' + ${visit.id}}">Edit</a>
         </td>
+    </tr>
+    <tr>
         <td>
-            <p th:value="${visit.id}"
-               th:text="${visit.id}+${visit.dentist}">
-            </p>
+            <a th:href="@{/}">Return</a>
         </td>
     </tr>
 </table>

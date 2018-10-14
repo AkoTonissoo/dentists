@@ -14,6 +14,7 @@ public class DentistService {
     @Autowired
     DentistRepository repository;
 
+    //Esilehel dropdowni jaoks
     public Iterable<DentistEntity> getAllDentists() {
         return repository.findAll();
     }

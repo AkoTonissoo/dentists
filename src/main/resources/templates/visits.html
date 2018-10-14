@@ -12,7 +12,7 @@
     </tr>
     <tr th:each="visit : ${visits}">
         <td>
-            <p th:text="'Kuupäev: '+${visit.date}+' '+'Arst: '+${visit.dentist}"></p>
+            <p th:text="'Aeg: '+${visit.date}+' '+'Arst: '+${visit.dentist}"></p>
         </td>
         <td>
             <a th:href="@{'/visits/delete/' + ${visit.id}}">Kustuta</a>

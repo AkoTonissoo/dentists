@@ -17,7 +17,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import javax.validation.Valid;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util.println;
 
@@ -34,6 +40,7 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/results").setViewName("results");
+        registry.addViewController("/taken").setViewName("taken");
     }
 
     @GetMapping("/visits")
@@ -62,9 +69,15 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
         }
 
         modelMap.addAttribute("visit", visit);
-        dentistVisitService.removeVisit(visit.getId());
-        dentistVisitService.addVisit(new DentistVisitEntity(visit.getDate(), visit.getDentist()));
-        return "redirect:/visits";
+
+        boolean success = dentistVisitService.addVisit(new DentistVisitEntity(visit.getDate(), visit.getDentist()));
+
+        if (success){
+            dentistVisitService.removeVisit(visit.getId());
+            return "redirect:/visits";
+        }
+        return "redirect:/taken";
+
     }
 
     @GetMapping("/")
@@ -80,8 +93,15 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
             return "form";
         }
 
-        dentistVisitService.addVisit(new DentistVisitEntity(visit.getDate(), visit.getDentist()));
-        println(dentistVisitService.getAllVisits().toString());
-        return "redirect:/results";
+        boolean success = dentistVisitService.addVisit(new DentistVisitEntity(visit.getDate(), visit.getDentist()));
+
+        if (success){
+            return "redirect:/results";
+        }
+        return "redirect:/taken";
+
+
+        //println(dentistVisitService.getAllVisits().toString());
+
     }
 }

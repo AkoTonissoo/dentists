@@ -50,6 +50,16 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
         return "visits";
     }
 
+    @PostMapping("/visits")
+    public String searchRegistrations(@RequestParam String search, DentistVisitEntity visit, Model model) {
+        println(search);
+
+        ArrayList<DentistVisitEntity> searches = dentistVisitService.getVisitsFromSearch(search);
+        model.addAttribute("search", searches);
+
+        return "search";
+    }
+
     @GetMapping("/visits/delete/{id}")
     public String chooseVisitToDelete(@PathVariable Integer id){
         dentistVisitService.removeVisit(id);

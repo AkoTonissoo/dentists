@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util.println;
 
@@ -42,6 +44,19 @@ public class DentistVisitService {
 
     public Iterable<DentistVisitEntity> getAllVisits() {
         return repository.findAll();
+    }
+
+    public ArrayList<DentistVisitEntity> getVisitsFromSearch(String searchable) {
+        ArrayList<DentistVisitEntity> matches = new ArrayList<>();
+
+        Iterable<DentistVisitEntity> values = repository.findAll();
+        for (DentistVisitEntity value: values){
+            if (value.getDentist().contains(searchable)){
+                matches.add(value);
+            }
+        }
+        println(matches.toString());
+        return matches;
     }
 
     public void removeVisit(Integer id){
